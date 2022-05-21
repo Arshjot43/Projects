@@ -1,0 +1,426 @@
+import { createStore } from "redux";
+
+const stateReducer=(state={isPostOpen:false,
+  isCommunityOpen:false,
+  isGroupOpen:false,
+  isCommunityClicked:false,
+  setPostData:[],
+  showGroupsRefresh:true,
+  showOnlyGroup:false,
+  hideCommunity:false,
+  isChatOpen:false,
+  intervalId:null,
+  toShowPost:"friends",
+  toShowCommunityPost:null,
+  prevDir:null,
+  userDetails:null,
+  infinteScroll:null,
+  chatIsClicked:false,
+  isSideTaken:false,
+  isLoggedIn:false},action)=>{
+if(action.type==="toggle-post-opener"){
+return{
+  isPostOpen:action.value,
+  isCommunityOpen:state.isCommunityOpen,
+  isGroupOpen:state.isGroupOpen,
+  isCommunityClicked:state.isCommunityClicked,
+  setPostData:state.setPostData,
+  showGroupsRefresh:state.showGroupsRefresh,
+  showOnlyGroup:state.showOnlyGroup,
+  hideCommunity:state.hideCommunity,
+  isChatOpen:state.isChatOpen,
+  intervalId:state.intervalId,
+  toShowPost:state.toShowPost,
+  toShowCommunityPost:state.toShowCommunityPost,
+  prevDir:state.prevDir,
+  userDetails:state.userDetails,
+  infinteScroll:state.infinteScroll,
+  chatIsClicked:state.chatIsClicked,
+  isSideTaken:state.isSideTaken,
+  isLoggedIn:state.isLoggedIn
+ }
+}
+
+
+if(action.type==="toggle-community"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:!state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+
+if(action.type==="toggle-group"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:!state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="click-community"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:!state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="set-postData"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:action.value,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="onRefreshGroupData"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:!state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="show-onlyGroup"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:!state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+
+if(action.type==="hideOtherCommunity"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:!state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="toggleChat"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:!state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="intervalId"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:action.value,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="toShowPost"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:action.value,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="toShowCommunityPost"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:action.value,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="getPrevData"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:action.value,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="userDetails"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:action.value,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="infinteScroll"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:action.value,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="openChatMenu"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:!state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type==="sideTaken"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:action.value,
+    isLoggedIn:state.isLoggedIn
+   }
+}
+if(action.type="login"){
+  return{
+    isPostOpen:state.isPostOpen,
+    isCommunityOpen:state.isCommunityOpen,
+    isGroupOpen:state.isGroupOpen,
+    isCommunityClicked:state.isCommunityClicked,
+    setPostData:state.setPostData,
+    showGroupsRefresh:state.showGroupsRefresh,
+    showOnlyGroup:state.showOnlyGroup,
+    hideCommunity:state.hideCommunity,
+    isChatOpen:state.isChatOpen,
+    intervalId:state.intervalId,
+    toShowPost:state.toShowPost,
+    toShowCommunityPost:state.toShowCommunityPost,
+    prevDir:state.prevDir,
+    userDetails:state.userDetails,
+    infinteScroll:state.infinteScroll,
+    chatIsClicked:state.chatIsClicked,
+    isSideTaken:state.isSideTaken,
+    isLoggedIn:action.value
+  }
+}
+return state
+}
+
+const store=createStore(stateReducer)
+
+export default store
